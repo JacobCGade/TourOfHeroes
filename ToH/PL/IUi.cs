@@ -4,6 +4,6 @@ namespace ToH.PL;
 
 public interface IUi
 {
-    Screen Screen { set; }
-    IScreenFactory ScreenFactory { get; }
+    Screen? Screen { set; }
+    IScreenFactory? ScreenFactory { get; }
 }

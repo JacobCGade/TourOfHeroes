@@ -9,9 +9,9 @@ public class Ui : IUi, IObserver
 {
     private readonly Controller _controller;
     private readonly ILog _log;
-    private Screen _screen;
+    private Screen? _screen;
 
-    public Screen Screen
+    public Screen? Screen
     {
         private get => _screen;
         set
@@ -20,7 +20,7 @@ public class Ui : IUi, IObserver
             _screen.Init();
         }
     }
-    public IScreenFactory ScreenFactory { get; }
+    public IScreenFactory? ScreenFactory { get; }
 
     public Ui(Controller controller, Screen? screen, ILog log, IScreenFactory screenFactory)
     {
