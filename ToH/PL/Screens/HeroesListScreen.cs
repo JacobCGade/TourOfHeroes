@@ -46,7 +46,7 @@ public class HeroesListScreen : Screen
     public override void Enter(IUi ui)
     {
         _log.Info($"HeroesListScreen.Enter: Switching to HeroScreen for hero in cursorPosition {cursorPosition}");
-        var newScreen = ui.ScreenFactory.CreateScreen(typeof(HeroScreen), _heroesController.GetAllHeroes()[cursorPosition]);
+        var newScreen = ui.ScreenFactory?.CreateScreen(typeof(HeroScreen), _heroesController.GetAllHeroes()[cursorPosition]);
         if (newScreen != null)
         {
             ui.Screen = newScreen;
@@ -67,7 +67,7 @@ public class HeroesListScreen : Screen
         _printer.PrintLine("   | Id | Name ");
         foreach (var (index, hero) in heroes.Select((value, i) => (i, value)))
         {
-            _printer.PrintLine($" {(index == cursorPosition ? "*" : " ")} | {hero.Id} | {hero.Name.ToUpper()}");
+            _printer.PrintLine($" {(index == cursorPosition ? "*" : " ")} | {hero.Id} | {hero.Name?.ToUpper()}");
         }
     } 
 

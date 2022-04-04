@@ -17,7 +17,7 @@ public class Ui : IUi, IObserver
         set
         {
             _screen = value;
-            _screen.Init();
+            _screen?.Init();
         }
     }
     public IScreenFactory? ScreenFactory { get; }
@@ -36,22 +36,22 @@ public class Ui : IUi, IObserver
         switch (_controller.Action)
         {
             case Action.None:
-                Screen.None(this);
+                Screen?.None(this);
                 break;
             case Action.Down:
-                Screen.Down(this);
+                Screen?.Down(this);
                 break;
             case Action.Up:
-                Screen.Up(this);
+                Screen?.Up(this);
                 break;
             case Action.Enter:
-                Screen.Enter(this);
+                Screen?.Enter(this);
                 break;
             case Action.Escape:
-                Screen.Escape(this);
+                Screen?.Escape(this);
                 break;
             case Action.Text:
-                Screen.Text(this, _controller.value!);
+                Screen?.Text(this, _controller.value!);
                 break;
             default:
                 _log.Error($"Unhandled action: {_controller.Action}");
