@@ -256,4 +256,27 @@ public class HeroesListScreenTest
         _ui.VerifySet(ui => ui.Screen=It.Is<HeroScreen>(hs => hs == heroScreen));
     }
 
+    // Test added to see if escape on HeroListScreen returns to Dashboard
+    [Fact]
+    public void ShouldSetScreenOnUiToDashBoard_WhenEscapeActionIsGiven()
+    {
+        // Arrange
+        var dasboardScreen = new DashboardScreen(new Mock<IHeroesController>().Object, new Mock<ISessionController>().Object,
+            new Mock<IPrinter>().Object, _log.Object);
+        var screenFactory = new Mock<IScreenFactory>();
+        screenFactory
+            .Setup(sf => sf.CreateScreen(
+                It.Is<Type>(t => t == typeof(DashboardScreen)),
+                It.IsAny<Hero>()))
+            .Returns(dasboardScreen);
+        _ui.Setup(ui => ui.ScreenFactory).Returns(screenFactory.Object);
+
+        // Act
+        uut.Escape(_ui.Object);
+
+        // Assert
+        _ui.VerifySet(ui => ui.Screen=It.Is<DashboardScreen>(ds => ds == dasboardScreen));
+    }
+
 }
+

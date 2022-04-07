@@ -28,11 +28,26 @@ public class HeroScreen : Screen
 
     public override void Escape(IUi ui)
     {
-        _log.Info($"HeroScreen.Escape: Switching to HeroesListScreen.");
-        var newScreen = ui.ScreenFactory?.CreateScreen(typeof(HeroesListScreen));
-        if (newScreen != null)
+        Console.WriteLine("Choose hero in Dashboard?");
+        string? input = Console.ReadLine();
+        if (input != null)
         {
-            ui.Screen = newScreen;
+            if (input.ToLower() == "y")
+            {
+                _log.Info($"HeroesListScreen.Escape: Switching to Dashboard screen");
+                var newScreen = ui.ScreenFactory?.CreateScreen(typeof(DashboardScreen));
+                if (newScreen != null)
+                    ui.Screen = newScreen;
+            }
+            else if (input.ToLower() == "n")
+            {
+                _log.Info($"HeroScreen.Escape: Switching to HeroesListScreen.");
+                var newScreen = ui.ScreenFactory?.CreateScreen(typeof(HeroesListScreen));
+                if (newScreen != null)
+                {
+                    ui.Screen = newScreen;
+                }
+            }
         }
     }
 }

@@ -53,6 +53,15 @@ public class HeroesListScreen : Screen
         }
     }
 
+    // Added function for Escape since it was left out
+    public override void Escape(IUi ui)
+    {
+        _log.Info($"HeroesListScreen.Escape: Switching to Dashboard screen");
+        var newScreen = ui.ScreenFactory?.CreateScreen(typeof(DashboardScreen));
+        if (newScreen != null)
+            ui.Screen = newScreen;
+    }
+
     public override void Init()
     {
         ShowHeroes();
